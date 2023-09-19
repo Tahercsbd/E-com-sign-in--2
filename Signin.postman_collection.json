@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "e86f206b-7546-45e5-9782-9f2cb823e158",
+		"name": "Sign in",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26244058"
+	},
+	"item": [
+		{
+			"name": "Positive",
+			"item": [
+				{
+					"name": "As a buyer , I want to sign in with my email and password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody)\r",
+									"pm.environment.set(\"token\", jsonData.token);\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\":\"{{password}}\",\r\n  \"email\": \"{{email}}\"\r\n}"
+						},
+						"url": {
+							"raw": "https://staging-be-ecom.techserve4u.com/api/user/signin",
+							"protocol": "https",
+							"host": [
+								"staging-be-ecom",
+								"techserve4u",
+								"com"
+							],
+							"path": [
+								"api",
+								"user",
+								"signin"
+							]
+						},
+						"description": "Date: 18/9/2023  \nProject Name: Single Owner eCommerce  \nTested By: Md Taher  \nReviewed By: Pranto  \nSE Name: Shimul  \nObjective: Buyer should be able to login with his email and password  \nExpected Result: Buyer should log in  \nActual Result: Buyer can log in  \nTest Status: Passed  \nTest Data:  \nemail: abu_taher72@yahoo.com  \npassword: Dhaka923348"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nagrtive",
+			"item": [
+				{
+					"name": "As a buyer , I don't want to sign in with my invalid email and password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody)\r",
+									"pm.environment.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"Dhaka123\",\r\n  \"email\": \"taher72@yahoo.com\"\r\n}"
+						},
+						"url": {
+							"raw": "https://staging-be-ecom.techserve4u.com/api/user/signin",
+							"protocol": "https",
+							"host": [
+								"staging-be-ecom",
+								"techserve4u",
+								"com"
+							],
+							"path": [
+								"api",
+								"user",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
